@@ -1,0 +1,41 @@
+---
+- name: Deploy cloud infrastructure
+  hosts: all
+
+  tasks:
+    # After tuning output
+    - name: Create an OpenShift cluster
+      openshift_cluster:
+        name: "{{ cluster_name }}"
+        state: present
+        namespace: "{{ cluster_namespace }}"
+        api_version: v1
+        api_key: "{{ _api_key_ }}"
+        kubeconfig: "{{ kubeconfig_location }}"
+        wait: true
+        wait_timeout: 600
+        wait_condition:
+          status: Ready
+        wait_sleep: 10
+        wait_retries: 100
+        wait_interval: 10
+        wait_for_pods:
+          - name: "{{ cluster_name }}"
+          - name: '{{ cluster_name }}-master'
+          - name: '{{ cluster_name }}-worker'
+        wait_for_services:
+          - name: '{{ cluster_name }}-master'
+          - name: '{{ cluster_name }}-worker'
+        wait_for_route:
+          - name: '{{ cluster_name }}-worker'
+          - name: '{{ cluster_name }}-master'
+        wait_for_service:
+          - name: '{{ cluster_name }}-worker'
+          - name: '{{ cluster_name }}-master'
+        wait_for_service_state:
+          - name: '{{ cluster_name }}-worker'
+
+      
+     
+
+      

@@ -1,0 +1,18 @@
+- name: Open PostgreSQL port with firewalld
+  hosts: all
+  become: true
+
+  tasks:
+    - name: Open port 5432/tcp
+      ansible.posix.firewalld:
+        port: 5432/tcp
+        permanent: true
+        state: enabled
+        immediate: true
+
+    - name: Open port 8083/tcp
+      ansible.posix.firewalld:
+        port: 8083/tcp
+        permanent: true
+        state: enabled
+        immediate: true
