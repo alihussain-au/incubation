@@ -1,18 +1,2 @@
----
-- name: Install postgresql-server and setup
-  hosts: all
-  become: true
-  tasks:
-    - name: Install postgresql-server
-      ansible.builtin.package:
-        name: postgresql-server
-        state: present
-    - name: Run postgresql setup command
-      ansible.builtin.command: postgresql-setup --initdb
-      args:
-        creates: /var/lib/pgsql/data/postgresql.conf
-    - name: Start and enable postgresql service
-      ansible.builtin.service:
-        name: postgresql
-        state: started
-        enabled: true
+##TO generate playbook can use prompt 
+# Install postgresql-server & Run postgresql setup command with postgresql.conf & Start and enable postgresql service
