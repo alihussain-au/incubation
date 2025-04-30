@@ -9,4 +9,5 @@
       state: started
 
   tasks:
-    # Install cockpit package & Copy cockpit.conf.j2 to /etc/cockpit & Start and enable service & Wait 15 seconds port 9090
+    # Install cockpit package & Copy cockpit.conf.j2 to /etc/cockpit & Start and enable service & Wait 15 seconds port 9090 
+
